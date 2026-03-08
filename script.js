@@ -60,14 +60,18 @@ issues.forEach(issue=>{
 
 const borderTopClass = issue.status === "open" ? "border-green-500" : "border-purple-500";
 
+const priorityColorClass = 
+    issue.priority.toUpperCase() === "HIGH" ? "text-red-600 bg-red-100" : 
+    issue.priority.toUpperCase() === "MEDIUM" ? "text-amber-500 bg-amber-100" : 
+    "text-gray-500 bg-gray-100";
 container.innerHTML += `
-  <div class="bg-white rounded-lg shadow-sm border-t-4 ${borderTopClass} p-5 flex flex-col gap-4">
+  <div class="bg-white rounded-lg shadow-md border-t-4 ${borderTopClass} p-5 flex flex-col gap-4">
     <div class="flex justify-between items-center">
         <div class="flex items-center gap-2">
             <span class="block w-6 h-6 rounded-full bg-green-200"><img src="./assets/Open-Status.png" alt=""></span>
             
         </div>
-        <span class="text-xs font-semibold text-red-500 uppercase tracking-wide">
+        <span class="text-[10px] font-bold ${priorityColorClass} px-3 py-1 rounded-full uppercase tracking-wider">
             ${issue.priority}
         </span>
     </div>
