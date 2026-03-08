@@ -28,8 +28,8 @@ GitHub Issues Tracker
 placeholder="Search issues..."
 class="border rounded px-3 py-1">
 
-<button class="bg-purple-600 text-white px-4 rounded">
-+ New Issue
+<button id="searchBtn" class="bg-purple-600 text-white px-4 rounded">
+Search
 </button>
 
 </div>
@@ -54,12 +54,12 @@ All
 </button>
 
 <button onclick="loadIssues('open')" id="openBtn"
-class="tab border px-4 py-1 rounded">
+class="tab border text-gray-600 px-4 py-1 rounded">
 Open
 </button>
 
 <button onclick="loadIssues('closed')" id="closedBtn"
-class="tab border px-4 py-1 rounded">
+class="tab border text-gray-600 px-4 py-1 rounded">
 Closed
 </button>
 
@@ -67,7 +67,7 @@ Closed
 
 <!-- Issue Count -->
 
-<div class="flex justify-between items-center mb-6 bg-white-900 p-4 rounded-lg shadow-sm border border-gray-100">
+<div class="flex justify-between items-center mb-6 bg-white-900 p-4 shadow-sm border border-gray-200">
 
    <div class="flex justify-center items-center gap-2">
      <div class="w-10 h-8 flex items-center">

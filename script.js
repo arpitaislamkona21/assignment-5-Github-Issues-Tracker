@@ -20,27 +20,57 @@ displayIssues(issues)
 }
 
 loadIssues()
-// সার্চ ইনপুট এলিমেন্টটি ধরা
-const searchInput = document.getElementById('searchInput');
 
-// ইনপুট বক্সে কিছু লিখলে এই ফাংশনটি চলবে
-searchInput.addEventListener('keyup', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
+// const searchInput = document.getElementById('searchInput');
+
+
+// searchInput.addEventListener('keyup', (e) => {
+//     const searchTerm = e.target.value.toLowerCase();
     
-    // বর্তমানের সব ইস্যু কার্ডগুলো ধরা
+    
+//     const allIssues = document.querySelectorAll('#issuesContainer > div');
+
+//     allIssues.forEach(issue => {
+       
+
+//         const title = issue.querySelector('h3').innerText.toLowerCase();
+        
+        
+//         if (title.includes(searchTerm)) {
+//             issue.style.display = "block";
+//         } else {
+//             issue.style.display = "none";
+//         }
+//     });
+// });
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn'); // বাটনটি ধরলাম
+
+// সার্চ করার মূল ফাংশন
+function performSearch() {
+    const searchTerm = searchInput.value.toLowerCase();
     const allIssues = document.querySelectorAll('#issuesContainer > div');
 
     allIssues.forEach(issue => {
-        // কার্ডের ভেতরের টাইটেল টেক্সট নেওয়া
+
         const title = issue.querySelector('h3').innerText.toLowerCase();
         
-        // টাইটেলের সাথে সার্চ টার্ম মিললে দেখানো হবে, না মিললে লুকানো হবে
-        if (title.includes(searchTerm)) {
+if (title.includes(searchTerm)) {
             issue.style.display = "block";
         } else {
             issue.style.display = "none";
         }
     });
+}
+
+// বাটনে ক্লিক করলে সার্চ হবে
+searchBtn.addEventListener('click', performSearch);
+
+// অথবা এন্টার বাটন চাপলে সার্চ হবে (ঐচ্ছিক কিন্তু ইউজার ফ্রেন্ডলি)
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        performSearch();
+    }
 });
 
 function displayIssues(issues){
