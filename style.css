@@ -1,0 +1,102 @@
+/* Default (Large Desktop >1280px) */
+body {
+    padding: 20px;
+}
+/* Horizontal scroll remove */
+html, body{
+    overflow-x: hidden;
+}
+*{
+    box-sizing: border-box;
+}
+
+body{
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#issuesContainer{
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+/* Large Device (≤1280px) */
+@media screen and (max-width:1280px){
+
+#issuesContainer{
+    grid-template-columns: repeat(3, 1fr);
+}
+
+nav .max-w-7xl{
+    flex-direction: row;
+}
+
+input{
+    width: 200px;
+}
+
+}
+
+
+/* Medium Device (≤992px) */
+@media screen and (max-width:992px){
+
+#issuesContainer{
+    grid-template-columns: repeat(2, 1fr);
+}
+
+nav .max-w-7xl{
+    flex-direction: column;
+    gap:10px;
+}
+
+#searchInput{
+    width:100%;
+}
+
+#searchBtn{
+    width:100%;
+}
+
+.bg-white.w-\[420px\]{
+    width:90%;
+}
+
+}
+
+
+/* Small Device (≤576px) */
+@media screen and (max-width:576px){
+
+#issuesContainer{
+    grid-template-columns: repeat(1, 1fr);
+}
+
+h1{
+    font-size:18px;
+}
+
+#searchInput{
+    width:100%;
+}
+
+#searchBtn{
+    width:100%;
+    margin-top:5px;
+}
+
+nav .max-w-7xl{
+    flex-direction: column;
+    gap:8px;
+}
+
+.tab{
+    font-size:12px;
+    padding:4px 10px;
+}
+
+#issueModal .bg-white{
+    width:90%;
+}
+
+}
