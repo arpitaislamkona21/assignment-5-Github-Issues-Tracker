@@ -1,10 +1,11 @@
+let allIssuesData = [];
 const API="https://phi-lab-server.vercel.app/api/v1/lab/issues"
 
 async function loadIssues(type="all"){
 
 let res=await fetch(API)
 let data=await res.json()
-
+allIssuesData=data.data;
 let issues=data.data
 
 if(type==="open"){
@@ -65,7 +66,8 @@ const priorityColorClass =
     issue.priority.toUpperCase() === "MEDIUM" ? "text-amber-500 bg-amber-100" : 
     "text-gray-500 bg-gray-100";
 container.innerHTML += `
-  <div class="bg-white rounded-lg shadow-md border-t-4 ${borderTopClass} p-5 flex flex-col gap-4">
+  <div onclick="openModal('${issue.id}')" 
+     class="cursor-pointer bg-white rounded-lg shadow-md border-t-4 ${borderTopClass} p-5 flex flex-col gap-4">
     <div class="flex justify-between items-center">
         <div class="flex items-center gap-2">
             <span class="block w-6 h-6 rounded-full bg-green-200"><img src="./assets/Open-Status.png" alt=""></span>
@@ -76,6 +78,10 @@ container.innerHTML += `
         </span>
     </div>
 
+
+
+
+
     <div class="flex-grow">
         <h3 class="text-lg font-bold text-gray-800 leading-snug mb-2">
             ${issue.title}
@@ -84,6 +90,11 @@ container.innerHTML += `
             ${issue.description}
         </p>
     </div>
+
+
+
+
+
 
     <div class=" pt-4 mt-1 flex flex-col gap-4">
         <div class="flex gap-2.5 items-center text-xs font-medium">
@@ -104,4 +115,51 @@ container.innerHTML += `
 })
 
 
+}
+
+function openModal(id) {
+    const issue = allIssuesData.find(i => String(i.id) === String(id));
+    if (!issue) return;
+
+    const modal = document.getElementById("issueModal");
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+
+   
+    document.getElementById("modalTitle").innerText = issue.title;
+    document.getElementById("modalDescription").innerText = issue.description;
+    document.getElementById("modalAuthor").innerText = issue.author;
+    document.getElementById("modalDate").innerText = issue.createdAt.split('T')[0];
+    document.getElementById("modalAssignee").innerText = issue.author; // Assignee হিসেবে নাম
+    document.getElementById("modalStatus").innerText = issue.status;
+    document.getElementById("modalPriority").innerText = issue.priority;
+
+    
+    const statusElem = document.getElementById("modalStatus");
+    statusElem.className = "px-2 py-1 rounded text-white text-xs capitalize"; // বেস ক্লাস
+    if(issue.status === "open") {
+        statusElem.classList.add("bg-green-500");
+    } else {
+        statusElem.classList.add("bg-purple-500");
+    }
+
+    
+    const priorityElem = document.getElementById("modalPriority");
+    priorityElem.className = "px-2 py-1 rounded text-white text-xs uppercase font-bold"; // বেস ক্লাস
+    
+    const priority = issue.priority.toUpperCase();
+    if (priority === "HIGH") {
+        priorityElem.classList.add("bg-red-500");
+    } else if (priority === "MEDIUM") {
+        priorityElem.classList.add("bg-amber-500");
+    } else {
+        priorityElem.classList.add("bg-gray-500");
+    }
+}
+
+
+function closeModal() {
+    const modal = document.getElementById("issueModal");
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
 }
